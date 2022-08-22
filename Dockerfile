@@ -2,36 +2,37 @@ FROM ubuntu:22.04
 
 WORKDIR /krpc-fsw
 
-# Update apt and get required base deps
-RUN apt-get update -y
-RUN apt-get install -y gcc g++ make cmake unzip
-
-# Copy over the dependencies folder, for checked-in src deps
+# Copy over the dependencies folder, install scripts, and source code
 COPY deps /krpc-fsw/deps
+COPY Makefile /krpc-fsw/Makefile
 COPY main.cpp /krpc-fsw/main.cpp
 
-COPY install.sh install.sh
-RUN ./install.sh
+# Get latest package information
+RUN apt-get update -y
 
-RUN g++ main.cpp -std=c++11 -lkrpc -lprotobuf
+# Install ASIO, used by KRPC for network communication
+RUN apt-get install -y libasio-dev
 
-CMD ./a.out
+# Install Google Protobuf, used by KRPC for serialization
+# Suggested by: https://grpc.io/docs/protoc-installation
+RUN apt-get install -y libprotobuf-dev protobuf-compiler
 
+# Unzip, build, and install KRPC
+# Instructions: https://krpc.github.io/krpc/cpp/client.html#using-cmake
+# Download (working fork): https://github.com/nullprofile/krpc/releases/tag/0.4.9-1.12.1
+RUN apt-get install -y pkg-config unzip
+RUN unzip /krpc-fsw/deps/krpc-cpp-0.4.9.zip -d /krpc-fsw
+RUN apt-get install -y gcc g++ make cmake unzip
+RUN cd /krpc-fsw/krpc-cpp-0.4.9 \
+    && cmake . \
+    && make \
+    && make install \
+    && ldconfig
 
-# Install ASIO, a header-only library for network communications
-# RUN apt-get install -y libasio-dev
+# Build and run the source code
+RUN make
 
-# Install Google Protobuf, used for serialization
-# Direct download: https://github.com/protocolbuffers/protobuf/releases (protoc-21.5-linux-x86_64.zim)
-# Instructions: https://grpc.io/docs/protoc-installation/
-# RUN cp /krpc-fsw/deps/protoc-21/bin/protoc /usr/local/bin && chmod +x /usr/local/bin/protoc && chmod +x /krpc-fsw/deps/protoc-21/bin/protoc
-# RUN cp -r /krpc-fsw/deps/protoc-21/include/google /usr/local/include
-# ENV PATH="${PATH}:/krpc-fsw/deps/protoc-21/bin"
-# Alt: Compile from source: https://github.com/protocolbuffers/protobuf/blob/main/src/README.md
-# RUN apt-get install -y libprotobuf-dev protobuf-compiler
-
-# Check
-# RUN echo $PATH
+CMD make run
 
 # Install KRPC from the provided ZIP file and cmake
 # Instructions: https://krpc.github.io/krpc/cpp/client.html#using-cmake
