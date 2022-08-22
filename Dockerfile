@@ -2,7 +2,7 @@ FROM ubuntu:22.04
 
 WORKDIR /krpc-fsw
 
-# Copy over the dependencies folder, install scripts, and source code
+# Copy over the dependencies folder, scripts, and source code
 COPY deps /krpc-fsw/deps
 COPY Makefile /krpc-fsw/Makefile
 COPY main.cpp /krpc-fsw/main.cpp
@@ -17,8 +17,7 @@ RUN apt-get install -y libasio-dev
 # Suggested by: https://grpc.io/docs/protoc-installation
 RUN apt-get install -y libprotobuf-dev protobuf-compiler
 
-# Unzip, build, and install KRPC
-# Instructions: https://krpc.github.io/krpc/cpp/client.html#using-cmake
+# Unzip, build, and install KRPC (requires pkg-config)
 # Download (working fork): https://github.com/nullprofile/krpc/releases/tag/0.4.9-1.12.1
 RUN apt-get install -y pkg-config unzip
 RUN unzip /krpc-fsw/deps/krpc-cpp-0.4.9.zip -d /krpc-fsw
