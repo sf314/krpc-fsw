@@ -33,12 +33,3 @@ RUN cd /krpc-fsw/krpc-cpp-0.4.9 \
 RUN make
 
 CMD make run
-
-# Install KRPC from the provided ZIP file and cmake
-# Instructions: https://krpc.github.io/krpc/cpp/client.html#using-cmake
-# RUN apt-get install -y pkg-config
-# RUN unzip /krpc-fsw/deps/krpc-cpp-0.4.8.zip -d /krpc-fsw
-# RUN cd /krpc-fsw/krpc-cpp-0.4.8 && ./configure && make && make install && ldconfig
-
-# Build and run the main code
-# RUN g++ main.cpp -std=c++11 -lkrpc -lprotobuf
