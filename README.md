@@ -3,6 +3,33 @@
 This project will hold all code related to controlling ships in KSP via a
 KRPC client running within a Docker container.
 
+Requirements:
+- Kerbal Space Program installed
+- KRPC 0.4.9 mod installed with KSP
+- Docker Compose (optional)
+
+## Quickstart
+
+Build and run the code via Docker Compose with:
+```sh
+docker-compose up --build
+```
+
+For convenience, I've provided a Makefile that allows you to perform a couple
+relevant commands using `make`:
+```sh
+# Build the base image and compile the FSW
+make
+
+# Execute the most recent image
+make run
+```
+
+To list all the `make` options I provide, use:
+```sh
+make help
+```
+
 ## What is KRPC?
 
 KRPC, or Kerbal Remote Procedure Call, is a mod for [Kerbal Space Program](https://kerbalspaceprogram.com)
@@ -34,3 +61,16 @@ KRPC exists as a mod for the game. The client may run on the same computer, or
 Links:
 - KRPC docs: https://krpc.github.io/krpc
 - KSP: https://www.kerbalspaceprogram.com
+
+## KRPC Source Code
+
+The official release of KRPC is 0.4.8, found in the [official KRPC repo](https://github.com/krpc/krpc/releases).
+However, this code does not compile against the current version of ASIO
+(libasi-dev), because of a few recent API changes. This means there is not an
+official build of KRPC that can successfully compile.
+
+The solution has been found in a fork: [`nullprofile/krpc` version 0.4.9](https://github.com/nullprofile/krpc/releases/tag/0.4.9-1.12.1).
+This forked version successfully compiles against the current version of ASIO,
+and so can be used for FSW development. In the provided ZIP assets, there is
+both the client code (checked into this repo in `deps/`), and the KSP mod
+containing the server code.

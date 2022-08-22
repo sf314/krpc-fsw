@@ -1,0 +1,8 @@
+version: '3'
+services: # build artifacts
+  krpc-fsw:
+    build:
+      context: .
+    # After CFS 289f8c0 (PSP 12e2607), requires privileged access for i.e. pipe creation and max queue depth errors
+    # Reference: https://github.com/sf314/HomeSat/commit/51b7f3ad6bf00f9c754d4e152905d88880b85f6d
+    # privileged: true
