@@ -64,3 +64,13 @@ Links:
 
 ## KRPC Source Code
 
+The official release of KRPC is 0.4.8, found in the [official KRPC repo](https://github.com/krpc/krpc/releases).
+However, this code does not compile against the current version of ASIO
+(libasi-dev), because of a few recent API changes. This means there is not an
+official build of KRPC that can successfully compile.
+
+The solution has been found in a fork: [`nullprofile/krpc` version 0.4.9](https://github.com/nullprofile/krpc/releases/tag/0.4.9-1.12.1).
+This forked version successfully compiles against the current version of ASIO,
+and so can be used for FSW development. In the provided ZIP assets, there is
+both the client code (checked into this repo in `deps/`), and the KSP mod
+containing the server code.
