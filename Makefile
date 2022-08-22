@@ -1,39 +1,31 @@
-# This Makefile is intended for use on both the host development system, i.e.
-# macOS, as well as from within a ubuntu:22.04 Docker container. Any make
-# commands prefixed with `docker` are meant to be run from macOS, in order to
-# perform docker commands.
+# This Makefile is intended for use on the host development system, i.e. macOS.
+# It is assumed that Docker will be used to build and run the FSW.
 
-LOCAL_TGTS := docker-build docker-run
-LINUX_TGTS := all run
-.PHONY: $(LOCAL_TGTS) $(LINUX_TGTS)
+.PHONY: all no-cache run
 
-SOURCES = \
-	main.cpp
+DOCKER_IMAGE_NAME := krpc_krpc-fsw
 
-FLAGS = \
-	-std=c++11 \
-	-Wall \
-	-Werror
+# VERBOSE_FLAG := --progress=plain
 
-LINKER_ARGS = \
-	-lkrpc \
-	-lprotobuf
-
-EXEC = krpc-fsw
-
-##### PROJECT BUILD: RUN WITHIN CONTAINERIZED ENVIRONMENT
-
+# The default make target will build a fresh image as defined in the provided
+# Dockerfile, using the Docker cache as necessary.
+# Note: Uncomment VERBOSE_FLAG for more logs, this is helpful for debugging
+# any compilation errors.
 all:
-	g++ main.cpp -std=c++11 -lkrpc -lprotobuf 
-	g++ $(FLAGS) $(SOURCES) -o $(EXEC) $(LINKER_ARGS)
+	docker build . $(VERBOSE_FLAG)
 
+# Build a fresh image as defined by the provided Dockerfile, but do not use any
+# cached intermediate containers. This results in the freshest build.
+no-cache:
+	docker build . --no-cache
+
+# Start the FSW in a container using the latest built image.
 run:
-	./$(EXEC)
+	docker-compose up
 
-##### CONTAINER BUILD: RUN FROM HOST SYSTEM
-
-docker-build:
-	docker build . --progress=plain
-
-docker-run:
-	docker-compose up --build
+# Remove all stopped containers, and delete the FSW image by name.
+# Note: this prunes *all* stopped containers, including containers for other
+# projects.
+clean:
+	docker container prune
+	docker image rm $(DOCKER_IMAGE_NAME)

@@ -4,7 +4,7 @@ WORKDIR /krpc-fsw
 
 # Copy over the dependencies folder, scripts, and source code
 COPY deps /krpc-fsw/deps
-COPY Makefile /krpc-fsw/Makefile
+COPY Makefile.fsw /krpc-fsw/Makefile
 COPY main.cpp /krpc-fsw/main.cpp
 
 # Get latest package information
@@ -28,7 +28,7 @@ RUN cd /krpc-fsw/krpc-cpp-0.4.9 \
     && make install \
     && ldconfig
 
-# Build and run the source code
+# Build and run the source code using the FSW makefile (Makefile.fsw)
 RUN make
 
 CMD make run

@@ -3,6 +3,33 @@
 This project will hold all code related to controlling ships in KSP via a
 KRPC client running within a Docker container.
 
+Requirements:
+- Kerbal Space Program installed
+- KRPC 0.4.9 mod installed with KSP
+- Docker Compose (optional)
+
+## Quickstart
+
+Build and run the code via Docker Compose with:
+```sh
+docker-compose up --build
+```
+
+For convenience, I've provided a Makefile that allows you to perform a couple
+relevant commands using `make`:
+```sh
+# Build the base image and compile the FSW
+make
+
+# Execute the most recent image
+make run
+```
+
+To list all the `make` options I provide, use:
+```sh
+make help
+```
+
 ## What is KRPC?
 
 KRPC, or Kerbal Remote Procedure Call, is a mod for [Kerbal Space Program](https://kerbalspaceprogram.com)
@@ -34,3 +61,6 @@ KRPC exists as a mod for the game. The client may run on the same computer, or
 Links:
 - KRPC docs: https://krpc.github.io/krpc
 - KSP: https://www.kerbalspaceprogram.com
+
+## KRPC Source Code
+
