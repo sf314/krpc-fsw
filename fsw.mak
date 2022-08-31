@@ -7,8 +7,11 @@
 
 .PHONY: all run
 
+INCLUDES = \
+	-Iinclude
+
 SOURCES = \
-	main.cpp
+	src/main.cpp
 
 FLAGS = \
 	-std=c++11 \
