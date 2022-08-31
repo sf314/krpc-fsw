@@ -15,11 +15,8 @@ RUN apt-get install -y libprotobuf-dev protobuf-compiler
 # Install packages required to build and install KRPC
 RUN apt-get install -y pkg-config unzip gcc g++ make cmake
 
-# Copy over all source files and build scripts
+# Copy over dependencies, which should be built first, so it gets cached
 COPY deps /krpc-fsw/deps
-COPY fsw.mak /krpc-fsw/Makefile
-COPY src /krpc-fsw/src
-COPY include /krpc-fsw/include
 
 # Unzip, build, and install KRPC (requires pkg-config)
 # Download link (working fork): https://github.com/nullprofile/krpc/releases/tag/0.4.9-1.12.1
@@ -29,6 +26,11 @@ RUN cd /krpc-fsw/krpc-cpp-0.4.9 \
     && make \
     && make install \
     && ldconfig
+
+# Copy over FSW. They are loaded last because they are expected to change the most
+COPY fsw.mak /krpc-fsw/Makefile
+COPY src /krpc-fsw/src
+COPY include /krpc-fsw/include
 
 # Build and run the source code using the FSW makefile (Makefile.fsw)
 RUN make
