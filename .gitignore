@@ -3,3 +3,6 @@
 
 # For personal use
 ignore/
+
+# Editor settings
+.vscode/
