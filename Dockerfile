@@ -18,7 +18,8 @@ RUN apt-get install -y pkg-config unzip gcc g++ make cmake
 # Copy over all source files and build scripts
 COPY deps /krpc-fsw/deps
 COPY fsw.mak /krpc-fsw/Makefile
-COPY main.cpp /krpc-fsw/main.cpp
+COPY src /krpc-fsw/src
+COPY include /krpc-fsw/include
 
 # Unzip, build, and install KRPC (requires pkg-config)
 # Download link (working fork): https://github.com/nullprofile/krpc/releases/tag/0.4.9-1.12.1
