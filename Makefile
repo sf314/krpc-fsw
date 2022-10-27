@@ -19,9 +19,9 @@ all:
 no-cache:
 	docker build . --no-cache
 
-# Start the FSW in a container using the latest built image.
+# Start the FSW in a container using the latest built image. (not docker-compose up)
 run:
-	docker-compose up
+	docker run krpc_krpc-fsw
 
 # Remove all stopped containers, and delete the FSW image by name.
 # Note: this prunes *all* stopped containers, including containers for other
