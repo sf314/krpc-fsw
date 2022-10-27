@@ -28,6 +28,19 @@ typedef struct {
     float thrust;
     float thrust_avail;
 
+    // TODO:
+    // Thrust per engine
+    // Gear status (up/down)
+    // Light status
+    // Aileron pitch
+    // Elevator pitch
+    // Rudder angle
+    // Flaps status
+    // Indicated airspeed
+    // Ambient pressure
+    // Mass
+    // Drag (vector?)
+
 } telemetry_t;
 
 
