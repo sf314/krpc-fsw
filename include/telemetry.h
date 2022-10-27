@@ -2,6 +2,11 @@
 
 #define _TELEMETRY_H
 
+// KRPC
+#include <krpc.hpp>
+#include <krpc/services/krpc.hpp>
+#include <krpc/services/space_center.hpp>
+
 typedef struct {
     // Position data
     double alt_mean; // ASL
