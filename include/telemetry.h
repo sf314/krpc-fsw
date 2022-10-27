@@ -48,5 +48,28 @@ typedef struct {
 
 } telemetry_t;
 
+/**
+ * @brief Update the provided telemetry struct based on the current data from
+ * the provided vessel.
+ * 
+ * @param vessel KRPC Vessel
+ * @param telem Telemetry struct
+ */
+void update_telemetry(krpc::services::SpaceCenter::Vessel vessel, telemetry_t* telem);
+
+/**
+ * @brief Print the provided telemetry all at once
+ * 
+ * @param telem Telemetry struct
+ */
+void print_telemetry(telemetry_t* telem);
+
+/**
+ * @brief Based on the provided telemetry, print any potential warnings, i.e.
+ * GPWS, G-Force, TCAS, etc.
+ * 
+ * @param telem Telemetry struct
+ */
+void print_warnings(telemetry_t* telem);
 
 #endif
