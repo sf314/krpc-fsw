@@ -12,7 +12,7 @@ DOCKER_IMAGE_NAME := krpc_krpc-fsw
 # Note: Uncomment VERBOSE_FLAG for more logs, this is helpful for debugging
 # any compilation errors.
 all:
-	docker build . $(VERBOSE_FLAG)
+	docker build . $(VERBOSE_FLAG) -t $(DOCKER_IMAGE_NAME)
 
 # Build a fresh image as defined by the provided Dockerfile, but do not use any
 # cached intermediate containers. This results in the freshest build.
