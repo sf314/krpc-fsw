@@ -12,16 +12,16 @@ DOCKER_IMAGE_NAME := krpc_krpc-fsw
 # Note: Uncomment VERBOSE_FLAG for more logs, this is helpful for debugging
 # any compilation errors.
 all:
-	docker build . $(VERBOSE_FLAG)
+	docker build . $(VERBOSE_FLAG) -t $(DOCKER_IMAGE_NAME)
 
 # Build a fresh image as defined by the provided Dockerfile, but do not use any
 # cached intermediate containers. This results in the freshest build.
 no-cache:
 	docker build . --no-cache
 
-# Start the FSW in a container using the latest built image.
+# Start the FSW in a container using the latest built image. (not docker-compose up)
 run:
-	docker-compose up
+	docker run krpc_krpc-fsw
 
 # Remove all stopped containers, and delete the FSW image by name.
 # Note: this prunes *all* stopped containers, including containers for other

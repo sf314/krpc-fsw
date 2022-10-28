@@ -7,8 +7,12 @@
 
 .PHONY: all run
 
+INCLUDES = \
+	-Iinclude
+
 SOURCES = \
-	main.cpp
+	src/main.cpp \
+	src/telemetry.cpp
 
 FLAGS = \
 	-std=c++11 \
@@ -22,7 +26,7 @@ LIBS = \
 EXEC = krpc-fsw
 
 all:
-	g++ $(FLAGS) $(SOURCES) -o $(EXEC) $(LIBS)
+	g++ $(FLAGS) $(INCLUDES) $(SOURCES) -o $(EXEC) $(LIBS)
 
 run:
 	./$(EXEC)

@@ -1,4 +1,4 @@
-# KRPC Main Code Repo
+# KRPC Flight Software
 
 This project will hold all code related to controlling ships in KSP via a
 KRPC client running within a Docker container.
@@ -29,6 +29,10 @@ To list all the `make` options I provide, use:
 ```sh
 make help
 ```
+
+Note that `Makefile` is for Docker operations, and `fsw.mak` is for actually
+building the FSW. If you don't care about Docker, and have all the dependencies
+installed locally, then you may simply use `fsw.make` as your main Makefile.
 
 ## What is KRPC?
 
@@ -66,7 +70,7 @@ Links:
 
 The official release of KRPC is 0.4.8, found in the [official KRPC repo](https://github.com/krpc/krpc/releases).
 However, this code does not compile against the current version of ASIO
-(libasi-dev), because of a few recent API changes. This means there is not an
+(libasio-dev), because of a few recent API changes. This means there is not an
 official build of KRPC that can successfully compile.
 
 The solution has been found in a fork: [`nullprofile/krpc` version 0.4.9](https://github.com/nullprofile/krpc/releases/tag/0.4.9-1.12.1).
