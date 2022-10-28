@@ -5,7 +5,7 @@
 #include <krpc/services/krpc.hpp>
 #include <krpc/services/space_center.hpp>
 
-void update_telemetry(krpc::services::SpaceCenter::Vessel vessel, telemetry_t* telem) {
+void telemetry_update(krpc::services::SpaceCenter::Vessel vessel, telemetry_t* telem) {
     using namespace std;
 
     // Reference frames
@@ -41,7 +41,7 @@ void update_telemetry(krpc::services::SpaceCenter::Vessel vessel, telemetry_t* t
     telem->thrust_avail = vessel.available_thrust();
 }
 
-void print_telemetry(telemetry_t* telem) {
+void telemetry_display(telemetry_t* telem) {
     using namespace std;
 
     // Print data, all at once (so there's not perceptible RPC lag)
@@ -64,7 +64,7 @@ void print_telemetry(telemetry_t* telem) {
     cout << "Heading: " << telem->heading << endl;
 }
 
-void print_warnings(telemetry_t* telem) {
+void telemetry_warnings(telemetry_t* telem) {
     using namespace std;
 
     // Print warnings based on data

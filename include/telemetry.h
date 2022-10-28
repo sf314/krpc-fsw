@@ -55,14 +55,14 @@ typedef struct {
  * @param vessel KRPC Vessel
  * @param telem Telemetry struct
  */
-void update_telemetry(krpc::services::SpaceCenter::Vessel vessel, telemetry_t* telem);
+void telemetry_update(krpc::services::SpaceCenter::Vessel vessel, telemetry_t* telem);
 
 /**
  * @brief Print the provided telemetry all at once
  * 
  * @param telem Telemetry struct
  */
-void print_telemetry(telemetry_t* telem);
+void telemetry_display(telemetry_t* telem);
 
 /**
  * @brief Based on the provided telemetry, print any potential warnings, i.e.
@@ -70,6 +70,6 @@ void print_telemetry(telemetry_t* telem);
  * 
  * @param telem Telemetry struct
  */
-void print_warnings(telemetry_t* telem);
+void telemetry_warnings(telemetry_t* telem);
 
 #endif
